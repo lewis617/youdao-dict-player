@@ -2,7 +2,13 @@ const puppeteer = require('puppeteer');
 const youdaoAccount = process.env.YOUDAO_ACCOUNT.split(';');
 const username = youdaoAccount[0];
 const password = youdaoAccount[1];
-
+function shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
 (async () => {
     const browser = await puppeteer.launch({
         headless: false,
@@ -38,6 +44,8 @@ const password = youdaoAccount[1];
         totalWords = [...totalWords, ...words];
         nextPageNum = await page.$$eval('.next-page', els => els.length);
     } while (nextPageNum === 2);
+    totalWords = shuffle(totalWords);
+    
     // 遍历每个单词
     for (let wordIndex = 0; wordIndex < totalWords.length; wordIndex++) {
         // 听读音
