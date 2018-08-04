@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 const puppeteer = require('puppeteer');
 if(!process.env.YOUDAO_ACCOUNT){
   console.log('请设置有道账户的环境变量：YOUDAO_ACCOUNT，用户名密码用英文分号隔开，如：username;password');
@@ -26,7 +28,6 @@ function shuffle(a) {
     const page = pages[0];
     await page.setViewport({ width: 1200, height: 700 });
     await page.goto('http://dict.youdao.com/wordbook/wordlist');
-    await page.bringToFront();
     await page.evaluate((a, b) => {
         document.querySelector('#username').value = a;
         document.querySelector('#password').value = b;
