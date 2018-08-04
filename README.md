@@ -7,34 +7,16 @@ Node 环境
 
 ## 安装方法
 
-克隆本仓库：
+全局安装 npm 包：
 
 ```
-git clone https://github.com/lewis617/youdao-dict-player.git
+npm i youdao-dict-player -g
 ```
 
-进入项目根目录：
+添加系统变量 `YOUDAO_ACCOUNT`：
 
 ```
-cd youdao-dict-player
-```
-
-安装依赖
-
-```
-npm i
-```
-
-设置账户
-
-```
-export YOUDAO_ACCOUNT="username;password"
-```
-
-链接到全局
-
-```
-npm link
+YOUDAO_ACCOUNT="username;password"
 ```
 
 ## 使用方法
