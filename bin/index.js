@@ -1,4 +1,8 @@
 const puppeteer = require('puppeteer');
+if(!process.env.YOUDAO_ACCOUNT){
+  console.log('请设置有道账户的环境变量：YOUDAO_ACCOUNT，用户名密码用英文分号隔开，如：username;password');
+  return;
+}
 const youdaoAccount = process.env.YOUDAO_ACCOUNT.split(';');
 const username = youdaoAccount[0];
 const password = youdaoAccount[1];
@@ -12,7 +16,7 @@ function shuffle(a) {
 (async () => {
     const browser = await puppeteer.launch({
         headless: false,
-        executablePath: `C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe`,
+        // executablePath: `C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe`,
         args: [
             `--window-size=1200,700`
         ],
