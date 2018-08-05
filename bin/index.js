@@ -45,7 +45,7 @@ function shuffle(a) {
         nextPageNum = await page.$$eval('.next-page', els => els.length);
     } while (nextPageNum === 2);
     totalWords = shuffle(totalWords);
-    
+
     // 遍历每个单词
     for (let wordIndex = 0; wordIndex < totalWords.length; wordIndex++) {
         // 听读音
@@ -54,16 +54,19 @@ function shuffle(a) {
         await page2.goto(`http://dict.youdao.com/search?q=${totalWords[wordIndex]}`);
         await page2.$$eval('.dictvoice', els => {
             els[0].click();
+            setInterval(() => {
+                els[0].click();
+            }, 2000);
         });
-        await page2.waitFor(3000);
+        await page2.waitFor(2000);
 
         // 看图片
         const page3 = await browser.newPage();
         await page3.setViewport({ width: 1200, height: 700 });
         await page3.goto(`https://cn.bing.com/images/search?q=${totalWords[wordIndex]}&ensearch=1`);
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 20; i++) {
             await page3.keyboard.press('ArrowDown');
-            await page3.waitFor(500);
+            await page3.waitFor(400);
         }
 
         await page2.close();
